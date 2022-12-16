@@ -17,8 +17,8 @@
             employeeModel.Taxable_Pay = 1500;
             employeeModel.Tax = 2000;
             employeeModel.Net_Pay = 45000 - (1000 + 1500 + 2000);
-            //repo.AddEmployee(employeeModel);
-            repo.GetAllEmployee();
+            repo.AddEmployee(employeeModel);
+            //repo.GetAllEmployee();
             
         }
     }

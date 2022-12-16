@@ -22,5 +22,24 @@ namespace ER_Diagram
         public DateTime Start { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+
+        //public EmployeeModel(int Id ,string Name,string PhoneNumber,string Address,string Department,char Gender,double Basic_Pay,double Deductions,
+        //    double Taxable_Pay,double Tax,double Net_Pay,DateTime Start,string City,string Country)
+        //{
+        //    this.Id = Id;
+        //    this.Name = Name;
+        //    this.PhoneNumber = PhoneNumber;
+        //    this.Address = Address;
+        //    this.Department = Department;
+        //    this.Gender = Gender;
+        //    this.Basic_Pay = Basic_Pay;
+        //    this.Deductions = Deductions;
+        //    this.Taxable_Pay = Taxable_Pay;
+        //    this.Tax = Tax;
+        //    this.Net_Pay = Net_Pay;
+        //    this.Start = Start;
+        //    this.City = City;
+        //    this.Country = Country;
+        //}
     }
 }
