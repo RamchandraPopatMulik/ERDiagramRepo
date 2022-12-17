@@ -40,15 +40,10 @@ namespace ER_Diagram
                             model.Taxable_Pay = reader.IsDBNull("Taxable_Pay") ? 0.0 : (Double)reader.GetDecimal("Taxable_Pay");
                             model.Tax = reader.IsDBNull("Tax") ? 0.0 : (Double)reader.GetDecimal("Tax");
                             model.Net_Pay = reader.IsDBNull("Net_pay") ? 0.0 : (Double)reader.GetDecimal("Net_pay");
-                           // model.Start = reader.IsDBNull("Start") ? DateTime.MinValue : reader.GetDateTime("Start");
+                            model.Start = reader.IsDBNull("Start") ? DateTime.MinValue : reader.GetDateTime("Start");
                             model.City = reader.IsDBNull("City") ? string.Empty : reader.GetString("City");
                             model.Country = reader.IsDBNull("Country") ? string.Empty : reader.GetString("Country");
                             Console.WriteLine(JsonConvert.SerializeObject(model));
-                            //EmployeeRepo employeeRepo = new EmployeeRepo();
-                            //DateTime StartDateTime = DateTime.Now;
-                            //employeeRepo.AddEmployee(employeeDetails);
-                            //DateTime StopDateTime = DateTime.Now;
-                            //Console.WriteLine(StopDateTime-StartDateTime);
                         }
                     }
                 }
@@ -103,6 +98,40 @@ namespace ER_Diagram
             finally
             {
                 this.objConnection.Close();
+            }
+        }
+        public string UpdateSalary()
+        {
+            SqlConnection objConnection = new SqlConnection(connectionstring);
+
+            using (objConnection)
+            {
+                string query = @"Update Employee_Payroll Set Basic_Pay = 3000000 Where Name = 'Sachin' and Id = 3";
+                SqlCommand objCommand = new SqlCommand(query, objConnection);
+                objConnection.Open();
+                try
+                {
+                    var objDataReader = objCommand.ExecuteNonQuery();
+                    if (objDataReader >= 1)
+                    {
+                        return "Data Updated";
+                    }
+                    else
+                    {
+                        return "Data  Not Updated";
+                    }
+                }
+                catch(Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    if(objConnection.State == ConnectionState.Open)
+                    {
+                        objConnection.Close();
+                    }
+                }
             }
         }
     }
