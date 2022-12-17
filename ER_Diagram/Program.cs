@@ -8,6 +8,7 @@
             EmployeeModel employeeModel = new EmployeeModel();
             //repo.AddEmployee(employeeModel);
             repo.UpdateSalary();
+            repo.UpdateSalaryUsingStoredProcedure(employeeModel);
         }
     }
 }
