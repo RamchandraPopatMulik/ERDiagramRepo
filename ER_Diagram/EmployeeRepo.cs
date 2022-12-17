@@ -173,76 +173,76 @@ namespace ER_Diagram
                 }
             }
         }
-        public string GetDataByName(EmployeeModel model)
-        {
-            SqlConnection objConnection = new SqlConnection(connectionstring);
-            EmployeeModel objEmployeeModel = new EmployeeModel();
-            try
-            {
-                using (objConnection)
-                {
-                    SqlCommand objCommand = new SqlCommand("GetByName", objConnection);
-                    objCommand.CommandType = CommandType.StoredProcedure;
-                    objCommand.Parameters.AddWithValue("@Name", model.Name);
-                    objConnection.Open();
-                    SqlDataReader reader = objCommand.ExecuteReader();
-                    if (reader.HasRows)
-                    { 
-                        while (reader.Read())
-                        {
-                            model.Id = reader.IsDBNull("Id") ? 0 : reader.GetInt32("Id");
-                            model.Name = reader.IsDBNull("Name") ? string.Empty : reader.GetString("Name");
-                            model.Basic_Pay = reader.IsDBNull("Basic_Pay") ? 0.0 : (Double)reader.GetDecimal("Basic_Pay");
-                            model.Gender = Convert.ToChar(reader.IsDBNull("Gender") ? String.Empty : reader.GetString("Gender"));
-                            model.Department = reader.IsDBNull("Department") ? string.Empty : reader.GetString("Department");
-                            model.PhoneNumber = reader.IsDBNull("PhoneNumber") ? string.Empty : reader.GetString("PhoneNumber");
-                            model.Address = reader.IsDBNull("Address") ? string.Empty : reader.GetString("Address");
-                            model.Deductions = reader.IsDBNull("Deductions") ? 0.0 : (Double)reader.GetDecimal("Deductions");
-                            model.Taxable_Pay = reader.IsDBNull("Taxable_Pay") ? 0.0 : (Double)reader.GetDecimal("Taxable_Pay");
-                            model.Tax = reader.IsDBNull("Tax") ? 0.0 : (Double)reader.GetDecimal("Tax");
-                            model.Net_Pay = reader.IsDBNull("Net_pay") ? 0.0 : (Double)reader.GetDecimal("Net_pay");
-                            model.Start = reader.IsDBNull("Start") ? DateTime.MinValue : reader.GetDateTime("Start");
-                            model.City = reader.IsDBNull("City") ? string.Empty : reader.GetString("City");
-                            model.Country = reader.IsDBNull("Country") ? string.Empty : reader.GetString("Country");
-                            Console.WriteLine(JsonConvert.SerializeObject(model));
-                            Console.WriteLine($"Employee ID   : {model.Id},\n" +
-                                             $"Employee Name : {model.Name},\n" +
-                                             $"PhoneNumber   : {model.PhoneNumber},\n" +
-                                             $"Address       : {model.Address},\n" +
-                                             $"Department    : {model.Department},\n" +
-                                             $"Gender        : {model.Gender},\n" +
-                                             $"Basic_Pay     : {model.Basic_Pay},\n" +
-                                             $"Deductions    : {model.Deductions},\n" +
-                                             $"Taxable_Pay   : {model.Taxable_Pay},\n" +
-                                             $"Tax           : {model.Tax},\n" +
-                                             $"Net_Pay       : {model.Net_Pay},\n" +
-                                             $"StartDate     : {model.Start},\n" +
-                                             $"City          : {model.City},\n" +
-                                             $"Country       : {model.Country}\n");
-                        }
-                        return "Data Found";
-                    }
-                    else
-                    {
-                        Console.WriteLine("No Records Found in the table");
-                        return "Data Not Found";
-                    }
-                    reader.Close();
-                }
+        //public string GetDataByName(EmployeeModel model)
+        //{
+        //    SqlConnection objConnection = new SqlConnection(connectionstring);
+        //    EmployeeModel objEmployeeModel = new EmployeeModel();
+        //    try
+        //    {
+        //        using (objConnection)
+        //        {
+        //            SqlCommand objCommand = new SqlCommand("GetByName", objConnection);
+        //            objCommand.CommandType = CommandType.StoredProcedure;
+        //            objCommand.Parameters.AddWithValue("@Name", model.Name);
+        //            objConnection.Open();
+        //            SqlDataReader reader = objCommand.ExecuteReader();
+        //            if (reader.HasRows)
+        //            { 
+        //                while (reader.Read())
+        //                {
+        //                    model.Id = reader.IsDBNull("Id") ? 0 : reader.GetInt32("Id");
+        //                    model.Name = reader.IsDBNull("Name") ? string.Empty : reader.GetString("Name");
+        //                    model.Basic_Pay = reader.IsDBNull("Basic_Pay") ? 0.0 : (Double)reader.GetDecimal("Basic_Pay");
+        //                    model.Gender = Convert.ToChar(reader.IsDBNull("Gender") ? String.Empty : reader.GetString("Gender"));
+        //                    model.Department = reader.IsDBNull("Department") ? string.Empty : reader.GetString("Department");
+        //                    model.PhoneNumber = reader.IsDBNull("PhoneNumber") ? string.Empty : reader.GetString("PhoneNumber");
+        //                    model.Address = reader.IsDBNull("Address") ? string.Empty : reader.GetString("Address");
+        //                    model.Deductions = reader.IsDBNull("Deductions") ? 0.0 : (Double)reader.GetDecimal("Deductions");
+        //                    model.Taxable_Pay = reader.IsDBNull("Taxable_Pay") ? 0.0 : (Double)reader.GetDecimal("Taxable_Pay");
+        //                    model.Tax = reader.IsDBNull("Tax") ? 0.0 : (Double)reader.GetDecimal("Tax");
+        //                    model.Net_Pay = reader.IsDBNull("Net_pay") ? 0.0 : (Double)reader.GetDecimal("Net_pay");
+        //                    model.Start = reader.IsDBNull("Start") ? DateTime.MinValue : reader.GetDateTime("Start");
+        //                    model.City = reader.IsDBNull("City") ? string.Empty : reader.GetString("City");
+        //                    model.Country = reader.IsDBNull("Country") ? string.Empty : reader.GetString("Country");
+        //                    Console.WriteLine(JsonConvert.SerializeObject(model));
+        //                    Console.WriteLine($"Employee ID   : {model.Id},\n" +
+        //                                     $"Employee Name : {model.Name},\n" +
+        //                                     $"PhoneNumber   : {model.PhoneNumber},\n" +
+        //                                     $"Address       : {model.Address},\n" +
+        //                                     $"Department    : {model.Department},\n" +
+        //                                     $"Gender        : {model.Gender},\n" +
+        //                                     $"Basic_Pay     : {model.Basic_Pay},\n" +
+        //                                     $"Deductions    : {model.Deductions},\n" +
+        //                                     $"Taxable_Pay   : {model.Taxable_Pay},\n" +
+        //                                     $"Tax           : {model.Tax},\n" +
+        //                                     $"Net_Pay       : {model.Net_Pay},\n" +
+        //                                     $"StartDate     : {model.Start},\n" +
+        //                                     $"City          : {model.City},\n" +
+        //                                     $"Country       : {model.Country}\n");
+        //                }
+        //                return "Data Found";
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine("No Records Found in the table");
+        //                return "Data Not Found";
+        //            }
+        //            reader.Close();
+        //        }
                     
                 
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-            finally
-            {
-                if (objConnection.State == ConnectionState.Open)
-                {
-                    objConnection.Close();
-                }
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return ex.Message;
+        //    }
+        //    finally
+        //    {
+        //        if (objConnection.State == ConnectionState.Open)
+        //        {
+        //            objConnection.Close();
+        //        }
+        //    }
+        //}
     }
 }
