@@ -385,6 +385,41 @@ namespace ER_Diagram
                 }
             }
         }
+        public string InsertEmployee_EmployeePayroll_AsWellAs_PayrollDetail(EmployeeModel employee)
+        {
+            SqlConnection objConnection = new SqlConnection(connectionstring);
+            using (objConnection)
+            {
+                //string query = @$"INSERT Into Employee_Payroll (EmployeeName,PhoneNumber,Address, Basic_Pay, StartDate, Gender, Department, Deductions, Taxable_Pay, Tax, Net_Pay,City,Country) Values ('{employee.Name}','{employee.PhoneNumber}','{employee.Address}','{ employee.Basic_Pay}','{ employee.StartDate}','{employee.Gender}', '{employee.Department}','{ employee.Deductions}','{employee.Taxable_Pay}','{ employee.Tax}','{ employee.Net_Pay}','{employee.City}','{employee.Country}')";
+                string query = @$"begin TRANSACTION declare @EmpId int, @Basic_Pay money INSERT Into employee_payroll (EmployeeName,PhoneNumber,Address, Basic_Pay, StartDate, Gender, Department, Deductions, Taxable_Pay, Tax, Net_Pay,City,Country) Values  ('{employee.Name}','{employee.PhoneNumber}','{employee.Address}','{employee.Basic_Pay}','{employee.Start}','{employee.Gender}', '{employee.Department}','{employee.Deductions}','{employee.Taxable_Pay}','{employee.Tax}','{employee.Net_Pay}','{employee.City}','{employee.Country}') set @EmpID = (select EmployeeID from Employee_Payroll where EmployeeName = '{employee.Name}') set @Basic_Pay = (select Basic_Pay from Employee_Payroll where EmployeeName = '{employee.Name}') insert into Payroll_Detail (EmployeeID,Salary) values (@EmpID, @Basic_Pay) Commit;";
+
+                SqlCommand objCommand = new SqlCommand(query, objConnection);
+                objConnection.Open();
+                try
+                {
+                    var objDataReader = objCommand.ExecuteNonQuery();
+                    if (objDataReader >= 1)
+                    {
+                        return "Data Inserted Successfully in Both Tables";
+                    }
+                    else
+                    {
+                        return "Data Not Inserted in Tables";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    if (objConnection.State == ConnectionState.Open)
+                    {
+                        objConnection.Close();
+                    }
+                }
+            }
+        }
     }
 }
             

@@ -14,7 +14,8 @@
             //repo.UpdateSalaryUsingStoredProcedure(employeeModel);
             //repo.GetDataByName(employeeModel);
             //repo.GetAggregateFunction("Ramchandra");
-            repo.InsertEmployee(employeeModel);
+            //repo.InsertEmployee(employeeModel);
+            repo.InsertEmployee_EmployeePayroll_AsWellAs_PayrollDetail(employeeModel);
         }
     }
 }
