@@ -351,6 +351,40 @@ namespace ER_Diagram
                 objConnection.Close();
             }
         }
+        public string InsertEmployee(EmployeeModel employee)
+        {
+            SqlConnection objConnection = new SqlConnection(connectionstring);
+            using (objConnection)
+            {
+                string query = @$"INSERT Into Employee_Payroll (EmployeeName,PhoneNumber,Address, Basic_Pay, StartDate, Gender, Department, Deductions, Taxable_Pay, Tax, Net_Pay,City,Country) Values ('{employee.Name}','{employee.PhoneNumber}','{employee.Address}','{employee.Basic_Pay}','{employee.Start}','{employee.Gender}', '{employee.Department}','{employee.Deductions}','{employee.Taxable_Pay}','{employee.Tax}','{employee.Net_Pay}','{employee.City}','{employee.Country}')";
+
+                SqlCommand Command = new SqlCommand(query, objConnection);
+                objConnection.Open();
+                try
+                {
+                    var reader = Command.ExecuteNonQuery();
+                    if (reader >= 1)
+                    {
+                        return "Data Inserted Successfully";
+                    }
+                    else
+                    {
+                        return "Data Not Inserted";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    if (objConnection.State == ConnectionState.Open)
+                    {
+                        objConnection.Close();
+                    }
+                }
+            }
+        }
     }
 }
             

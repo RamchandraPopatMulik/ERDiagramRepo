@@ -9,11 +9,12 @@
             //repo.AddEmployee(employeeModel);
             //repo.UpdateSalary();
             //employeeModel.Id = 1;
-            employeeModel.Name = "Ramchandra";
+            //employeeModel.Name = "Ramchandra";
             //employeeModel.Basic_Pay = 5000000;
             //repo.UpdateSalaryUsingStoredProcedure(employeeModel);
             //repo.GetDataByName(employeeModel);
-            repo.GetAggregateFunction("Ramchandra");
+            //repo.GetAggregateFunction("Ramchandra");
+            repo.InsertEmployee(employeeModel);
         }
     }
 }
